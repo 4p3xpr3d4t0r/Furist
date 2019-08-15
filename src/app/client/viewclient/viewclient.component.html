@@ -1,0 +1,36 @@
+<form class="form-inline">
+  <input class="form-control" name="searchInput" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 80%;">
+  <button class="btn btn-outline-primary" (click)="searchText=''">X</button>
+</form>
+<table class="table table-sm">
+  <thead>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Email</th>
+    <th>Phone no</th>
+    <th>Reference no</th>
+  </thead>
+<ng-container *ngFor="let Clients of clientArray">
+  <tr class="table-dark" *ngIf="filterCondition(Clients)">
+    <td>{{Clients.first_name}}</td>
+    <td>{{Clients.last_name}}</td>
+    <td>{{Clients.email}}</td>
+    <td>{{Clients.phone_no}}</td>
+    <td>{{Clients.reference_no}}</td>
+    <td>
+      <button class="btn btn-outline-danger" (click)="onDelete(Clients.$key)">Delete</button>
+    </td>
+  </tr>
+</ng-container>
+</table>
+<div class="alert alert-danger" *ngIf="showDeletedMessage">
+Deleted successfully.
+</div>
+
+<div class="blog-btn-icons">
+  <div *ngIf="auth.isUserLoggedIn" (click)="logout()" class="icon shadow bg-danger d-flex justify-content-center align-items-center mb-2">
+    <p class="d-inline-block h3" title="Logout">
+      <img src="assets/img/logout-icon.png" />
+    </p>
+  </div>
+</div>

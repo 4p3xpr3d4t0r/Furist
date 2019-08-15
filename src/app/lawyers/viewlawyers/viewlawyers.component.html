@@ -1,0 +1,62 @@
+<div class="text-right">
+<form class="form">
+  
+<div class="row">
+    <div class="col-6">
+
+    </div>
+
+    <div class="col-6">
+      <input class="form" name="searchInput" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 20%;">
+      
+    </div>
+</div>
+
+</form>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title text-center">Available Lawyers</h4>
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Email</th>
+              <th>Phone no</th>
+              <th>Reference no</th>
+              <th>Operation</th>
+            </tr>
+          </thead>
+          <tbody>
+              <ng-container *ngFor="let Lawyers of lawyerArray">
+              <tr *ngIf="filterCondition(Lawyers)">
+                  <td>{{Lawyers.first_name}}</td>
+                  <td>{{Lawyers.last_name}}</td>
+                  <td>{{Lawyers.email}}</td>
+                  <td>{{Lawyers.phone_no}}</td>
+                  <td>{{Lawyers.reference_no}}</td>
+                  <td>
+                    <button class="btn btn-outline-danger" (click)="onDelete(Lawyers.$key)">Delete</button>
+                  </td>
+                </tr>
+                </ng-container>
+
+          </tbody>
+
+      </table>
+  </div>
+
+</div>
+
+<div class="alert alert-danger" *ngIf="showDeletedMessage">
+Deleted successfully.
+</div>
+
+<div class="blog-btn-icons">
+  <div *ngIf="auth.isUserLoggedIn" (click)="logout()" class="icon shadow bg-danger d-flex justify-content-center align-items-center mb-2">
+    <p class="d-inline-block h3" title="Logout">
+      <img src="assets/img/logout-icon.png" />
+    </p>
+  </div>
+</div>
